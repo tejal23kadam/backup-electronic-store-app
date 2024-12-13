@@ -49,11 +49,11 @@ function Slider() {
                 <div class="row">
                     <div class="col-md-12">
                         {/* <!-- Header Contetnt --> */}
-                        <div class="content-block">
+                         <div class="content-block">
                             <h1>Buy & Sell Near You </h1>
                             <p>Join the millions who buy and sell from each other everyday in local communities around the world</p>
-
-                        </div>
+                            
+                        </div> 
                         {/* <!-- Advance Search --> */}
                         <div class="advance-search">
                             <div class="container">

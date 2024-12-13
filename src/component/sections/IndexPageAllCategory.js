@@ -159,30 +159,31 @@ function IndexPageAllCategory() {
             <section class="call-to-action">
                 {/* <!-- Container Start --> */}
                 <div className='bg-3 section-sm"'>
-                <div class="container ">
-                    <div class="row justify-content-md-center text-center">
-                        <div class="col-md-8">
-                            <div class="content-holder">
-                                <h2>Sustainable Electronics, Responsible Disposal</h2>
-                                <ul class="list-inline mt-30">
-                                    <li class="list-inline-item">
-                                        <h3>1</h3>
-                                        <h4>Collect e-Waste</h4>
-                                        <h5>Gather electronic waste for eco-friendly disposal and recycling.</h5>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <h3>2</h3>
-                                        <h4>Drop Off</h4>
-                                        <h5>Drop off your e-waste at designated centers for responsible recycling.</h5></li>
-                                    <li class="list-inline-item">
-                                        <h3>3</h3>
-                                        <h4>Contribute to Change</h4>
-                                        <h5>Join us to make a difference and shape a better future together.</h5></li>
-                                </ul>
+                    <div class="container ">
+                        <div class="row justify-content-md-center text-center">
+                            <div class="col-md-12 col-lx-8">
+                                <div class="content-holder mt-5">
+                                    <h2>Sustainable Electronics, Responsible Disposal</h2>
+                                    <img class="e-waste-img img-fluid mb-5 mt-5" src={require('../../images/green-e-waste-logo.png')} alt="no img" />
+                                    <div class="row">
+                                        <div class=" col-sm-4 mb-5 ">
+                                            <h3>1</h3>
+                                            <h4>Collect e-Waste</h4>
+                                            <h5>Gather electronic waste for eco-friendly disposal and recycling.</h5>
+                                        </div>
+                                        <div class=" col-sm-4 mb-5 ">
+                                            <h3>2</h3>
+                                            <h4>Drop Off</h4>
+                                            <h5>Drop off your e-waste at designated centers for responsible recycling.</h5></div>
+                                        <div class=" col-sm-4 mb-5">
+                                            <h3>3</h3>
+                                            <h4>Contribute to Change</h4>
+                                            <h5>Join us to make a difference and shape a better future together.</h5></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 {/* <!-- Container End --> */}
             </section>
@@ -245,7 +246,7 @@ function IndexPageAllCategory() {
                 {/* <!-- Container End --> */}
             </section>
 
-            
+
 
 
         </div>
