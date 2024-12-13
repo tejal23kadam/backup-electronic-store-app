@@ -954,6 +954,10 @@ a:hover {
   margin-right: -5px;
   margin-left: -5px;
 }
+
+.form-row div{
+  margin : 0px 10px 10px ;
+}
 .form-control {
   border-radius: 2px;
   height: 50px;
@@ -1821,6 +1825,12 @@ ul.pagination .active a {
 .dashboard-container .action .list-inline .list-inline-item:not(:last-child) {
   margin-right: 0px;
 }
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
 .dashboard-container .action .edit {
   background: #f7f7f7;
 }
@@ -1912,6 +1922,15 @@ ul.pagination .active a {
   border-bottom: 3px solid #F4F7F9;
   text-align: center;
 }
+.category-block .header-text {
+  margin-bottom: 20px;  
+  text-align: center;
+}
+.category-block .header h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 5px;
+}
 .category-block .header h4 {
   font-size: 18px;
   font-weight: 700;
@@ -1919,34 +1938,43 @@ ul.pagination .active a {
 }
 .category-block .header .icon-bg-1 {
   background: #ccdb38;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(204, 219, 56, 0.35);
 }
 .category-block .header .icon-bg-2 {
   background: #a676b8;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(166, 118, 184, 0.35);
 }
 .category-block .header .icon-bg-3 {
   background: #fe7e17;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(254, 126, 23, 0.35);
+  position: relative;
 }
 .category-block .header .icon-bg-4 {
   background: #EC3A56;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(236, 58, 86, 0.35);
 }
 .category-block .header .icon-bg-5 {
   background: #1DBFFF;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(29, 191, 255, 0.35);
 }
 .category-block .header .icon-bg-6 {
   background: #02d3a4;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(2, 211, 164, 0.35);
 }
 .category-block .header .icon-bg-7 {
   background: #bc02d3;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(188, 2, 211, 0.35);
 }
 .category-block .header .icon-bg-8 {
   background: #025fd3;
+  display: inline-block;
   box-shadow: 0 0 0px 4px rgba(2, 95, 211, 0.35);
 }
 .category-block .header i {
@@ -3018,6 +3046,19 @@ form textarea {
     height: 35px;
     line-height: 35px;
   }
+}
+
+.leading-brand-img{  
+    background-color: unset;
+    
+    cursor: pointer;
+    gap: 42px;
+    height: 144px;
+    width: 144px;
+}
+
+.leading-brand-img img{
+  border-radius: 50%;
 }
 /*# sourceMappingURL=style.css.map */
 

@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 import IndividualCategoryDetailPage from './component/sections/IndividualCategoryDetailPage';
 import Slider from './component/sections/Slider';
 import TrendingItems from './component/sections/TrendingItems';
+import IndexPageAllCategory from './component/sections/IndexPageAllCategory';
+import Footer from './component/sections/Footer';
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
       <NavBar />
       <Slider />
       <TrendingItems/>
+      <IndexPageAllCategory/>
+      <Footer/>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {/* <div className='leftDiv'>
           <AllFilterSection category={filterCategory} />
