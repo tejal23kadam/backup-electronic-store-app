@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { IoClose, IoMenu } from "react-icons/io5";
 import { addToCategoryFilter } from '../sliceComponent/CategoryFilterSlice';
 
 

@@ -12,6 +12,10 @@ import Slider from './component/sections/Slider';
 import TrendingItems from './component/sections/TrendingItems';
 import IndexPageAllCategory from './component/sections/IndexPageAllCategory';
 import Footer from './component/sections/Footer';
+import TermsAndConditions from './component/sections/TermsAndConditions';
+import IndexPage from './component/sections/IndexPage';
+import ContactUs from './component/sections/ContactUs';
+import AboutUS from './component/sections/AboutUs';
 
 function App() {
 
@@ -20,25 +24,15 @@ function App() {
   const dropDownDiscountSelectedItem = useSelector((state) => state.dropDownDiscountSelectedItemFilter.dropDownDiscountSelectedItem);
   return (
     <div>
-      <NavBar />
-      <Slider />
-      <TrendingItems/>
-      <IndexPageAllCategory/>
-      <Footer/>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {/* <div className='leftDiv'>
-          <AllFilterSection category={filterCategory} />
-        </div> */}
-        <div className='rightDiv'>
-          <Routes>
+      <Routes>
+        <Route path='/' element={<IndexPage />} />
+        <Route path="/cartData" element={<ShoppingCartData />} />
+        <Route path="/termsAndConditions" element={<TermsAndConditions />} />
+        <Route path="/contactUs" element={<ContactUs/>} />
+        <Route path="/aboutUs" element={<AboutUS/>} />
 
-            <Route path='/' element={<FetchAllCategoryData />} />
-
-            <Route path="/cartData" element={<ShoppingCartData />} />
-          </Routes>
-          <IndividualCategoryDetailPage category={filterCategory} brandFilter={dropDownBrandSelectedItem} discountFilter={dropDownDiscountSelectedItem} />
-        </div>
-      </div>
+      </Routes>
+      {/* <IndividualCategoryDetailPage category={filterCategory} brandFilter={dropDownBrandSelectedItem} discountFilter={dropDownDiscountSelectedItem} /> */}
     </div>
   );
 }

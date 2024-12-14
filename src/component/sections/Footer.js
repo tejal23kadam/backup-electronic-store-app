@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -6,7 +7,7 @@ function Footer() {
             {/* <!-- Container Start --> */}
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0">
+                    <div class=" col-sm-6 mb-5 ">
                         {/* <!-- About --> */}
                         <div class="block about">
                             {/* <!-- footer logo --> */}
@@ -17,16 +18,29 @@ function Footer() {
                         </div>
                     </div>
                     {/* <!-- Link list --> */}
-                    <div class="col-lg-2 offset-lg-1 col-md-3 col-6 mb-4 mb-lg-0">
+                    <div class=" col-sm-3 mb-5 ">
                         <div class="block">
-                            <h4>Pages</h4>                           
-                                <div><a href="dashboard-my-ads.html">About US</a></div>
-                                <div><a href="dashboard-favourite-ads.html">Contact</a></div>
-                                <div><a href="dashboard-archived-ads.html">Help Center</a></div>                               
-                           
+                            <h4>Pages</h4>
+                            <div><Link to="/aboutUs">About US</Link></div>
+                            <div>E-Waste</div>
+                            <div><Link to="/contactUs">Contact Us</Link></div>
+                            <div><Link to="/termsAndConditions">Terms & Conditions</Link></div>
+
                         </div>
                     </div>
-                
+
+                    <div class=" col-sm-3 mb-5 ">
+                        <div class="block">
+                            <h4>Trending Products</h4>
+                            <div>iPhone16 Pro</div>
+                            <div>Lenovo Laptops</div>
+                            <div>JBL Headphones</div>
+                            <div>Samsung Tv</div>
+
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             {/* <!-- Container End --> */}

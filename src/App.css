@@ -2939,10 +2939,11 @@ form textarea {
 .footer {
   background: #232425;
 }
-.footer .block h4 {
+.footer .block {
   color: #fff;
   font-size: 16px;
   margin-bottom: 25px;
+  text-align: center;
 }
 .footer .block.about img {
   margin-bottom: 25px;
@@ -2965,9 +2966,9 @@ form textarea {
 .footer .block ul.terms-list {
   margin-top: 10px;
 }
-.footer .block ul.terms-list li a {
+/* .footer .block ul.terms-list li a {
   padding-right: 10px;
-}
+} */
 .footer .block-2 {
   padding: 18px 30px;
   background: #46484A;
