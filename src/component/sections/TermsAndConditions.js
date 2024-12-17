@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 function TermsAndConditions() {
     return (
         <div>
@@ -75,7 +74,8 @@ function TermsAndConditions() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>            
+            
         </div>
     )
 }

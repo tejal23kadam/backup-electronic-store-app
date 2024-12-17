@@ -1,11 +1,11 @@
 import React from 'react'
 import Footer from './Footer'
-import NavBar from './NavBar'
+
 
 function ContactUs() {
     return (
         <div>
-            <NavBar/>
+            
             <section class="page-title">
                 {/* <!-- Container Start --> */}
                 <div class="container">

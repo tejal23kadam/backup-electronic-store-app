@@ -22,7 +22,7 @@ function Footer() {
                         <div class="block">
                             <h4>Pages</h4>
                             <div><Link to="/aboutUs">About US</Link></div>
-                            <div>E-Waste</div>
+                            <div><Link to="/eWest">E-Waste</Link></div>
                             <div><Link to="/contactUs">Contact Us</Link></div>
                             <div><Link to="/termsAndConditions">Terms & Conditions</Link></div>
 
