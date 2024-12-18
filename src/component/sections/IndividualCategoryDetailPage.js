@@ -47,7 +47,7 @@ function IndividualCategoryDetailPage(props) {
   else {
     filteredData = data.filter(data => data.category === props.category);
   }
-  debugger
+  
   console.log("filterb " + filterBrands);
   if (filterBrands) {
     filteredData = filteredData.filter((data) => data.brand.toLowerCase().includes(filterBrands));

@@ -19,6 +19,10 @@ import ContactUs from './component/sections/ContactUs';
 import AboutUS from './component/sections/AboutUs';
 import EWest from './component/sections/EWest';
 import AppliancesCategory from './component/sections/AppliancesCategory';
+import GamingCategory from './component/sections/GamingCategory';
+import LaptopCategory from './component/sections/LaptopCategory';
+import MobileCategory from './component/sections/MobileCategory';
+import TvCategory from './component/sections/TvCategory';
 
 function App() {
 
@@ -36,6 +40,10 @@ function App() {
         <Route path="/eWest" element={<EWest/>} />
         <Route path="/audio" element={<AudioCategory/>} />
         <Route path="/appliances" element={<AppliancesCategory/>} />
+        <Route path="/gaming" element={<GamingCategory/>} />
+        <Route path="/laptop" element={<LaptopCategory/>} />
+        <Route path="/mobile" element={<MobileCategory/>} />
+        <Route path="/tv" element={<TvCategory/>} />
 
       </Routes>
       {/* <IndividualCategoryDetailPage category={filterCategory} brandFilter={dropDownBrandSelectedItem} discountFilter={dropDownDiscountSelectedItem} /> */}
