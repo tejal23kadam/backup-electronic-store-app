@@ -49,36 +49,29 @@ function Slider() {
                 <div class="row">
                     <div class="col-md-12">
                         {/* <!-- Header Contetnt --> */}
-                         <div class="content-block">
-                            <h1>Buy & Sell Near You </h1>
+                        <div class="content-block">
+                         
+                            <h1>Upto 50% Discount On Each Product</h1>
                             <p>Join the millions who buy and sell from each other everyday in local communities around the world</p>
-                            
-                        </div> 
+
+                        </div>
                         {/* <!-- Advance Search --> */}
                         <div class="advance-search">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-12 col-md-12 align-content-center">
-                                        <form>
-                                            <div class="form-row">
-                                                <div class="form-group col-xl-6 col-lg-3 col-md-6">
+                                  
+                                      
+                                          
+                                                <div class="col-xl-10 col-lg-10 col-md-8 ">
                                                     <input type="text" class="form-control my-2 my-lg-1" id="inputtext4"
                                                         placeholder="What are you looking for" />
-                                                </div>
-                                                <div class="form-group col-lg-3 col-md-6">
-                                                    <select class="w-100 form-control mt-lg-1 mt-md-2">
-                                                        <option class="option selected"> Choose Category</option>
-                                                        <option value="1">Top rated</option>
-                                                        <option value="2">Lowest Price</option>
-                                                        <option value="4">Highest Price</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
+                                                </div>                                               
+                                                <div class="col-xl-2 col-lg-2 col-md-4 align-self-center">
                                                     <button type="submit" class="btn btn-primary active w-100">Search Now</button>
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                            
+                                       
+                                   
                                 </div>
                             </div>
                         </div>

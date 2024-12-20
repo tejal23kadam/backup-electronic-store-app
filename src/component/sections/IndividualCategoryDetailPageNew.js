@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Pagination from '../paginationComponent/Pagination';
-import SingleProductDetailPage from '../singleProductDetailComponent/SingleProductDetailPage';
+import { Link } from 'react-router-dom';
 import { addToCart } from '../sliceComponent/CartSlice';
 import NavBar from './NavBar'
+import { addToProductIDFilter } from '../sliceComponent/ProductIdSlice';
+
 
 function IndividualCategoryDetailPageNew(props) {
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [open, setOpen] = useState(false);
-    const [currentProductId, setCurrentProductId] = useState(1);
-    let [brand, setbrand] = useState("⬇️ Select a brand ⬇️")
+    const [currentPage, setCurrentPage] = useState(1);        
+    let [brand, setbrand] = useState("⬇️ Select a brand ⬇️")    
     const postsPerPage = 8;
-
-    const data = useSelector((state) => state.allData.data.products);
-    let filterBrands;
-    let filteredData;
     let brandDistinctValues;
+    let filterDiscount = props.discountFilter;
 
-    let filterDiscount = props.discountFilter
+    const data = useSelector((state) => state.allData.data.products);  
+    const [filteredData, setFilteredData] = useState(data);
+  
     const loading = useSelector((state) => state.allData.loading);
     const error = useSelector((state) => state.allData.error);
 
@@ -26,58 +25,42 @@ function IndividualCategoryDetailPageNew(props) {
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleOpen = (id) => {
-        setOpen(true);
-        setCurrentProductId(id);
-    };
-
+   
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
     let handlebrandChange = (e) => {        
-        setbrand(e.target.value)
-        handleFilter();
-    }
+        setbrand(e.target.value)        
+    }    
+    //category Filter
+    let individualBrandData = data.filter(datas => datas.category.toLowerCase() === props.category.toLowerCase());    
+    useEffect(() => {
+        let tempFilteredData = individualBrandData ;
+    
+        // Brand Filter
+        if (brand !== '⬇️ Select a brand ⬇️') {
+            tempFilteredData = tempFilteredData.filter(data => data.brand.toLowerCase().includes(brand.toLowerCase()));
+        }
+        setFilteredData(tempFilteredData);
+    }, [brand]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
     if (!data || data.length === 0) return <h1>No data available</h1>;
 
-    if (props.category === '' || props.category === 'all') {
-        filteredData = data;
-    }
-    else {
-        filteredData = data.filter(data => data.category === props.category);
-    }
-
+   
     // get brand for each category
 
-    const propertyValues = filteredData.map(obj => obj['brand']);
+    const propertyValues = individualBrandData.map(obj => obj['brand']);
     var newArray = propertyValues.map(function (x) { return x.toLowerCase() })
     const uniqueValuesSet = new Set(newArray);
     brandDistinctValues = Array.from(uniqueValuesSet);
-
-
-
-    console.log("filterb " + filterBrands);
-    let handleFilter = () => {
-        if (brand) {
-            filteredData = filteredData.filter((data) => data.brand.toLowerCase().includes(brand));
-            console.log("brand" + brand);
-            console.log("filter brand data" + JSON.stringify(filteredData));
-        }
-    }
-
+    console.log("brandDistinctValues = "+ brandDistinctValues);
+   
     if (filterDiscount) {
         filteredData = filteredData.filter((data) => data.discount === filterDiscount);
         console.log("filter discount data" + JSON.stringify(filteredData));
     }
-
 
     return (
         <div>
@@ -85,10 +68,10 @@ function IndividualCategoryDetailPageNew(props) {
             <section class="page-search">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-10 col-xl-10 advance-search nice-select-white ">
+                        <div class="col-lg-10 col-xl-10 col-md-8 advance-search ">
                             <input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for ?" />
                         </div>
-                        <div className='col-lg-2 col-xl-2 advance-search nice-select-white'>
+                        <div className='col-lg-2 col-xl-2 col-md-4 advance-search align-self-center'>
                             <button type="submit" class="btn btn-primary active w-100">Search Now</button>
                         </div>
                     </div>
@@ -113,7 +96,6 @@ function IndividualCategoryDetailPageNew(props) {
 
                                     <select onChange={handlebrandChange}>
                                         <option defaultValue="⬇️ Select a brand ⬇️"> -- Select a brand -- </option>
-
                                         {brandDistinctValues.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
                                     </select>
                                 </div>
@@ -163,7 +145,7 @@ function IndividualCategoryDetailPageNew(props) {
                                         (filteredData.slice(indexOfFirstPost, indexOfLastPost).map((data) => (
                                             <div className="pro" key={data.id} >
                                                 <div class="des" >
-                                                    <img src={data.image} alt="noImage" onClick={() => handleOpen(data.id)} />
+                                                 <Link to="/product-details"><img src={data.image} onClick={() => { dispatch(addToProductIDFilter(data.id)) }} alt="noImage" /></Link>   
                                                     <h5 className="overme">{data.title} </h5>
                                                     <div>
                                                         {

@@ -1304,13 +1304,6 @@ ul.pagination .active a {
   background: #5672f9;
   padding: 30px 0;
 }
-.page-search .advance-search .form-group {
-  margin-bottom: 0;
-}
-.page-search .advance-search .form-control {
-  border: 1px solid #fff;
-  color: #fff;
-}
 
 .bg-light {
   background: #fff;
@@ -1605,9 +1598,7 @@ ul.pagination .active a {
     display: block !important;
   }
 }
-.hero-area .advance-search .form-control {
-  border-color: #dedede;
-}
+
 .hero-area .advance-search button {
   display: block;
 }
