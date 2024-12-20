@@ -28,24 +28,13 @@ function SingleProductDetailPageNew() {
                                                 </div>
 
                                                 {/* <!-- product slider --> */}
-					<div class="product-slider">
-						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-							<img class="img-fluid w-100" src="images/products/products-1.jpg" alt="product-img"/>
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Second slide"/>
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-3.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-3.jpg" alt="Third slide"/>
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-1.jpg" alt="Third slide"/>
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Third slide"/>
-						</div>
-					</div>
-					{/* <!-- product slider --> */}
+                                                <div class="product-slider">
+                                                    <div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
+                                                        <img class="img-fluid w-100" src="images/products/products-1.jpg" alt="product-img" />
+                                                    </div>
+
+                                                </div>
+                                                {/* <!-- product slider --> */}
 
                                                 <div class="content mt-5 pt-5">
                                                     <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
