@@ -2,6 +2,7 @@ import React from 'react'
 import '../../App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import OwlCarousel from 'react-owl-carousel';
+import { Link } from 'react-router-dom';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
@@ -37,7 +38,7 @@ function IndexPageAllCategory() {
                                     <div class="category-block">
                                         <div class="header">
                                             <i class="bi bi-tv icon-bg-1"></i>
-                                            <h4>Appliances</h4>
+                                            <h4><Link to="/appliances">Appliances</Link></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +48,7 @@ function IndexPageAllCategory() {
                                     <div class="category-block">
                                         <div class="header">
                                             <i class="bi bi-mic icon-bg-2"></i>
-                                            <h4>Audio</h4>
+                                            <h4><Link to="/audio">Audio</Link></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +58,7 @@ function IndexPageAllCategory() {
                                     <div class="category-block">
                                         <div class="header">
                                             <i class="bi bi-cassette icon-bg-3"></i>
-                                            <h4>Gaming</h4>
+                                            <h4><Link to="/gaming">Gaming</Link></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +70,7 @@ function IndexPageAllCategory() {
                                     <div class="category-block">
                                         <div class="header">
                                             <i class="bi bi-laptop-fill icon-bg-5"></i>
-                                            <h4>Laptop</h4>
+                                            <h4><Link to="/laptop">Laptop</Link></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +81,7 @@ function IndexPageAllCategory() {
                                     <div class="category-block">
                                         <div class="header">
                                             <i className="bi bi-phone-vibrate icon-bg-7"></i>
-                                            <h4>Mobile</h4>
+                                            <h4><Link to="/mobile">Mobile</Link></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +92,7 @@ function IndexPageAllCategory() {
 
                                         <div class="header">
                                             <i class="bi bi-pip icon-bg-8"></i>
-                                            <h4>TV</h4>
+                                            <h4><Link to="/tv">Tv</Link></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +130,7 @@ function IndexPageAllCategory() {
                                         <img class="card-img-top img-fluid" src={require('../../images/Microsoft.jpg')} alt="no img" />
                                     </div>
                                     <div className='item leading-brand-img'>
-                                        <img class="card-img-top img-fluid" src={require('../../images/Apple-Logo.jpg')} alt="no img" />
+                                        <img class="card-img-top img-fluid" src={require('../../images/apple_logo-512.jpg')} alt="no img" />
                                     </div>
                                     <div className='item leading-brand-img'>
                                         <img class="card-img-top img-fluid" src={require('../../images/lg.jpg')} alt="no img" />
@@ -147,7 +148,10 @@ function IndexPageAllCategory() {
                                         <img class="card-img-top img-fluid" src={require('../../images/mi.jpg')} alt="no img" />
                                     </div>
                                     <div className='item leading-brand-img'>
-                                        <img class="card-img-top img-fluid" src={require('../../images/poco.jpg')} alt="no img" />
+                                        <img class="card-img-top img-fluid" src={require('../../images/boat1.png')} alt="no img" />
+                                    </div>
+                                    <div className='item leading-brand-img'>
+                                        <img class="card-img-top img-fluid" src={require('../../images/asus.jpg')} alt="no img" />
                                     </div>
                                 </OwlCarousel>
                             </div>
