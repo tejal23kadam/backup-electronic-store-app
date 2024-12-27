@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Pagination from '../paginationComponent/Pagination';
 import { Link } from 'react-router-dom';
@@ -6,61 +6,75 @@ import { addToCart } from '../sliceComponent/CartSlice';
 import NavBar from './NavBar'
 import { addToProductIDFilter } from '../sliceComponent/ProductIdSlice';
 
-
 function IndividualCategoryDetailPageNew(props) {
 
-    const [currentPage, setCurrentPage] = useState(1);        
-    let [brand, setbrand] = useState("⬇️ Select a brand ⬇️")    
-    const postsPerPage = 8;
-    let brandDistinctValues;
-    let filterDiscount = props.discountFilter;
-
-    const data = useSelector((state) => state.allData.data.products);  
-    const [filteredData, setFilteredData] = useState(data);
-  
+    const data = useSelector((state) => state.allData.data.products);
     const loading = useSelector((state) => state.allData.loading);
     const error = useSelector((state) => state.allData.error);
 
+    let [currentPage, setCurrentPage] = useState(1);
+    let [brand, setbrand] = useState("⬇️ Select a brand ⬇️")
+    let [filterDiscount, setFilterDiscount] = useState(null);
+    let [filterPrice, setFilterPrice] = useState(null);
+    let [filteredData, setFilteredData] = useState(data);
     const dispatch = useDispatch();
+
+    let brandDistinctValues;
+
+    const postsPerPage = 8;
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-   
+
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-    let handlebrandChange = (e) => {        
-        setbrand(e.target.value)        
-    }    
-    //category Filter
-    let individualBrandData = data.filter(datas => datas.category.toLowerCase() === props.category.toLowerCase());    
+    let handlebrandChange = (e) => {
+        setbrand(e.target.value)
+    }
+    const handlePriceFilter = (min, max) => {
+        setFilterPrice({ min, max });
+    };
+    const handleDiscountFilter = (val) => {
+        console.log("val is " + val);
+        setFilterDiscount(val);
+    };
+   
+    //get brand for each category
+    let individualBrandData = data.filter(datas => datas.category.toLowerCase() === props.category.toLowerCase());
     useEffect(() => {
-        let tempFilteredData = individualBrandData ;
-    
+        let tempFilteredData = individualBrandData;
+
         // Brand Filter
         if (brand !== '⬇️ Select a brand ⬇️') {
             tempFilteredData = tempFilteredData.filter(data => data.brand.toLowerCase().includes(brand.toLowerCase()));
         }
+
+        // Price Filter
+        if (filterPrice) {
+            tempFilteredData = tempFilteredData.filter(data => data.price >= filterPrice.min && data.price <= filterPrice.max);
+        }
+
+        //discount filter 
+        if (filterDiscount > 0) {
+            tempFilteredData = tempFilteredData.filter((data) => data.discount >= filterDiscount);
+        }
+
         setFilteredData(tempFilteredData);
-    }, [brand]);
+    }, [brand, filterPrice, filterDiscount, individualBrandData]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
     if (!data || data.length === 0) return <h1>No data available</h1>;
 
-   
-    // get brand for each category
+
+    //stores the unique brands for selected category
 
     const propertyValues = individualBrandData.map(obj => obj['brand']);
     var newArray = propertyValues.map(function (x) { return x.toLowerCase() })
     const uniqueValuesSet = new Set(newArray);
     brandDistinctValues = Array.from(uniqueValuesSet);
-    console.log("brandDistinctValues = "+ brandDistinctValues);
-   
-    if (filterDiscount) {
-        filteredData = filteredData.filter((data) => data.discount === filterDiscount);
-        console.log("filter discount data" + JSON.stringify(filteredData));
-    }
+    console.log("brandDistinctValues = " + brandDistinctValues);    
 
     return (
         <div>
@@ -93,7 +107,6 @@ function IndividualCategoryDetailPageNew(props) {
                                 <div class="widget filter">
                                     <h4 class="widget-header">Show Brands</h4>
 
-
                                     <select onChange={handlebrandChange}>
                                         <option defaultValue="⬇️ Select a brand ⬇️"> -- Select a brand -- </option>
                                         {brandDistinctValues.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
@@ -103,35 +116,35 @@ function IndividualCategoryDetailPageNew(props) {
                                 <div class="widget product-shorting">
                                     <h4 class="widget-header">By Price</h4>
                                     <div>
-                                        <button type="button" class="btn btn-main"> Under 500 </button>
+                                        <button type="button" class="btn btn-main" onClick={() => handlePriceFilter(0, 500)}> Under 500 </button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main"> <span>&#8377;</span>500 - <span>&#8377;</span>1000 </button>
+                                        <button type="button" class="btn btn-main" onClick={() => handlePriceFilter(500, 1000)}> <span>&#8377;</span>500 - <span>&#8377;</span>1000 </button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main"> <span>&#8377;</span>1000 - <span>&#8377;</span>2000</button>
+                                        <button type="button" class="btn btn-main" onClick={() => handlePriceFilter(1000, 2000)}>  <span>&#8377;</span>1000 - <span>&#8377;</span>2000</button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main">  Over <span>&#8377;</span>2000</button>
+                                        <button type="button" class="btn btn-main" onClick={() => handlePriceFilter(2000)}>   Over <span>&#8377;</span>2000</button>
                                     </div>
                                 </div>
 
                                 <div class="widget product-shorting">
                                     <h4 class="widget-header">By Discount</h4>
                                     <div>
-                                        <button type="button" class="btn btn-main"> 5%off or more </button>
+                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(5)}> 5%off or more </button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main"> 10%off or more </button>
+                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(10)}> 10%off or more </button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main"> 15%off or more</button>
+                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(15)}> 15%off or more</button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main">  20%off or more</button>
+                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(20)}>  20%off or more</button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-main">  25%off or more</button>
+                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(25)}>  25%off or more</button>
                                     </div>
                                 </div>
                             </div>
@@ -143,9 +156,9 @@ function IndividualCategoryDetailPageNew(props) {
                                 {(filteredData) ?
                                     (
                                         (filteredData.slice(indexOfFirstPost, indexOfLastPost).map((data) => (
-                                            <div className="pro" key={data.id} >
+                                            <div className="pro " key={data.id} >
                                                 <div class="des" >
-                                                 <Link to="/product-details"><img src={data.image} onClick={() => { dispatch(addToProductIDFilter(data.id)) }} alt="noImage" /></Link>   
+                                                    <Link to="/product-details"><img src={data.image} onClick={() => { dispatch(addToProductIDFilter(data.id)) }} alt="noImage" /></Link>
                                                     <h5 className="overme">{data.title} </h5>
                                                     <div>
                                                         {
@@ -153,9 +166,9 @@ function IndividualCategoryDetailPageNew(props) {
                                                                 <div style={{ display: "flex" }}>
                                                                     <h5><s>{data.price}</s> </h5>
                                                                     <h4><span>&#8377;</span>{Math.trunc(data.price - ((data.price * data.discount) / 100))}</h4>
-                                                                    <div style={{ display: "flex", paddingTop: "6px" }}>
-                                                                        <p class="discount">{data.discount}%</p>
-                                                                        <p>off</p>
+                                                                    <div style={{ display: "flex" }}>
+                                                                        <p class="discount">{data.discount}%</p> off
+
                                                                     </div>
                                                                 </div>
                                                             ) :

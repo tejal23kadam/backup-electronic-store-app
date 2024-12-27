@@ -62,7 +62,7 @@ function SingleProductDetailPageNew() {
                                                                 enim fuga laborum, error provident labore nesciunt ad. Libero reiciendis necessitatibus voluptates ab
                                                                 excepturi rem non, nostrum aut aperiam? Itaque, aut. Quas nulla perferendis neque eveniet ullam?</p>
 
-                                                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/LUH7njvhydE?rel=0&amp;controls=0&amp;showinfo=0"
+                                                            <iframe width="100%" title="iframe" height="400" src="https://www.youtube.com/embed/LUH7njvhydE?rel=0&amp;controls=0&amp;showinfo=0"
                                                                 frameborder="0" allowfullscreen></iframe>
                                                             <p></p>
                                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam sed, officia reiciendis necessitatibus

@@ -1,12 +1,10 @@
 import React from 'react';
-import AllFilterSection from './DropDownFilterForEachSections';
 import IndividualCategoryDetailPageNew from './IndividualCategoryDetailPageNew';
 
 
 function AudioCategory() { 
   return (
-    <div>
-      {/* <AllFilterSection category="audio" />  */}
+    <div>      
       <IndividualCategoryDetailPageNew category="audio"/>     
     </div>
   );

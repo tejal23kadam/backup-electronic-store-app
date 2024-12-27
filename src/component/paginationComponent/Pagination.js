@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 const Pagination = ({ length, postsPerPage, currentPage, handlePagination }) => {
     let paginationNumber = []
-
-    const [pageNumberLimit, setpageNumberLimit] = useState(5);
+    const pageNumberLimit = 5;    
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
