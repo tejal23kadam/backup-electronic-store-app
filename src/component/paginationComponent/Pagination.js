@@ -1,17 +1,16 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const Pagination = ({ length, postsPerPage, currentPage, handlePagination }) => {
     let paginationNumber = []
-    const pageNumberLimit = 5;    
+    const pageNumberLimit = 5;
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
-
+    
     for (let i = 1; i <= Math.ceil(length / postsPerPage); i++) {
         paginationNumber.push(i);
     }
-
     const renderPageNumbers = paginationNumber.map((pageNumber) => {
         if (pageNumber < maxPageNumberLimit + 1 && pageNumber > minPageNumberLimit) {
             return (
@@ -24,6 +23,7 @@ const Pagination = ({ length, postsPerPage, currentPage, handlePagination }) => 
             return null;
         }
     });
+   
 
     const handleNextbtn = () => {
         handlePagination(currentPage + 1);
@@ -43,28 +43,21 @@ const Pagination = ({ length, postsPerPage, currentPage, handlePagination }) => 
         }
     };
     return (
+
         <div className="pagination1">
-            {/* <div>
-                <button className="arrow" id="prevPage" disabled>← <span className="nav-text">PREV</span></button>
-            </div> */}
             <div className="pages">
-                <button
-                    onClick={handlePrevbtn}
-                    disabled={currentPage === paginationNumber[0] ? true : false}
-                >
-                  <i class="bi bi-chevron-left"></i>
+                <button style={{ display: (renderPageNumbers.length > 0 ) ? 'block' : 'none' }} onClick={handlePrevbtn} disabled={currentPage === paginationNumber[0] ? true : false}>
+                    <i class="bi bi-chevron-left"></i>
                 </button>
+                {/* Render page numbers if they exist */}
                 <div className="page-number">
-                    {renderPageNumbers}
+                    {renderPageNumbers.length > 0 ? renderPageNumbers : <h1>No Results</h1>}
                 </div>
-                <button
-                    onClick={handleNextbtn}
-                    disabled={currentPage === paginationNumber.length ? true : false}
-                >
+                <button style={{ display:(renderPageNumbers.length > 0 ) ? 'block' : 'none' }} onClick={handleNextbtn} disabled={currentPage === paginationNumber.length ? true : false}>
                     <i class="bi-chevron-right"></i>
                 </button>
             </div>
         </div>
-    )
+    );
 }
 export default Pagination

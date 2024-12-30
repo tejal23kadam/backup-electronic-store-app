@@ -26,6 +26,9 @@ function IndividualCategoryDetailPageNew(props) {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
+    //get brand for each category
+    let individualBrandData = data.filter(datas => datas.category.toLowerCase() === props.category.toLowerCase());
+
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -36,12 +39,12 @@ function IndividualCategoryDetailPageNew(props) {
         setFilterPrice({ min, max });
     };
     const handleDiscountFilter = (val) => {
-        console.log("val is " + val);
         setFilterDiscount(val);
     };
-   
-    //get brand for each category
-    let individualBrandData = data.filter(datas => datas.category.toLowerCase() === props.category.toLowerCase());
+    const handleClearAll = () => {
+        setFilteredData(individualBrandData);
+    };
+
     useEffect(() => {
         let tempFilteredData = individualBrandData;
 
@@ -52,7 +55,8 @@ function IndividualCategoryDetailPageNew(props) {
 
         // Price Filter
         if (filterPrice) {
-            tempFilteredData = tempFilteredData.filter(data => data.price >= filterPrice.min && data.price <= filterPrice.max);
+
+            tempFilteredData = tempFilteredData.filter(data => Math.trunc(data.price - ((data.price * data.discount) / 100)) >= filterPrice.min && Math.trunc(data.price - ((data.price * data.discount) / 100)) <= filterPrice.max);
         }
 
         //discount filter 
@@ -61,7 +65,7 @@ function IndividualCategoryDetailPageNew(props) {
         }
 
         setFilteredData(tempFilteredData);
-    }, [brand, filterPrice, filterDiscount, individualBrandData]);
+    }, [brand, filterPrice, filterDiscount]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -74,7 +78,7 @@ function IndividualCategoryDetailPageNew(props) {
     var newArray = propertyValues.map(function (x) { return x.toLowerCase() })
     const uniqueValuesSet = new Set(newArray);
     brandDistinctValues = Array.from(uniqueValuesSet);
-    console.log("brandDistinctValues = " + brandDistinctValues);    
+    console.log("brandDistinctValues = " + brandDistinctValues);
 
     return (
         <div>
@@ -97,20 +101,26 @@ function IndividualCategoryDetailPageNew(props) {
                         <div class="col-md-12">
                             <div class="search-result bg-gray">
                                 <h2 style={{ textTransform: "capitalize" }}>Results For {props.category}</h2>
-                                <p>{filteredData.length} Results Available</p>
+                                <p>{filteredData ? `${filteredData.length} Results Available` : 'No data available'}</p>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-4">
                             <div class="category-sidebar">
+                                <div>
+                                    <button type="button" data-index="0" class="btn btn-main" onClick={() => handleClearAll()}>Clear All</button>
+                                </div>
+
                                 <div class="widget filter">
                                     <h4 class="widget-header">Show Brands</h4>
-
-                                    <select onChange={handlebrandChange}>
-                                        <option defaultValue="⬇️ Select a brand ⬇️"> -- Select a brand -- </option>
-                                        {brandDistinctValues.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
-                                    </select>
+                                    <form>
+                                        <select onChange={handlebrandChange}>
+                                            <option defaultValue="⬇️ Select a brand ⬇️"> -- Select a brand -- </option>
+                                            {brandDistinctValues.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
+                                        </select>
+                                        <input type="reset" value="clear" />
+                                    </form>
                                 </div>
 
                                 <div class="widget product-shorting">
@@ -153,7 +163,7 @@ function IndividualCategoryDetailPageNew(props) {
 
                             {/* <!--new comment start --> */}
                             <div className='pro-container'>
-                                {(filteredData) ?
+                                {(filteredData != null) ?
                                     (
                                         (filteredData.slice(indexOfFirstPost, indexOfLastPost).map((data) => (
                                             <div className="pro " key={data.id} >
@@ -185,13 +195,13 @@ function IndividualCategoryDetailPageNew(props) {
                                     (<h1>data is missing</h1>)
                                 }
                             </div>
+
                             <Pagination
                                 length={filteredData.length}
                                 postsPerPage={postsPerPage}
                                 currentPage={currentPage}
                                 handlePagination={handlePagination}
                             />
-                            {/* new comment ends */}
                         </div>
                     </div>
                 </div>
