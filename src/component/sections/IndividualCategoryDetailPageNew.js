@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import Pagination from '../paginationComponent/Pagination';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../sliceComponent/CartSlice';
@@ -8,13 +7,13 @@ import NavBar from './NavBar'
 import { addToProductIDFilter } from '../sliceComponent/ProductIdSlice';
 
 function IndividualCategoryDetailPageNew(props) {
-
+    const cartData = useSelector((state) => state.cart);
     const data = useSelector((state) => state.allData.data.products);
     const loading = useSelector((state) => state.allData.loading);
     const error = useSelector((state) => state.allData.error);
 
     let [currentPage, setCurrentPage] = useState(1);
-    let [brand, setbrand] = useState("⬇️ Select a brand ⬇️")
+    let [brand, setbrand] = useState(null);
     let [filterDiscount, setFilterDiscount] = useState(null);
     let [filterPrice, setFilterPrice] = useState(null);
     let [filteredData, setFilteredData] = useState(data);
@@ -29,9 +28,6 @@ function IndividualCategoryDetailPageNew(props) {
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-
-
 
     //get brand for each category
     let individualBrandData = data.filter(datas => datas.category.toLowerCase() === props.category.toLowerCase());
@@ -48,23 +44,21 @@ function IndividualCategoryDetailPageNew(props) {
     const handleDiscountFilter = (val) => {
         setFilterDiscount(val);
     };
-    const handleClearAll = (e) => {
+    const handleClearAll = () => {
         setFilteredData(individualBrandData);
         setActivePriceColor(null);
         setActiveDiscountColor(null);
+        // setbrand("hello");
+        // console.log("brand = " + brand);
     };
-
-    const handleClear = () => {
-        setbrand();
-    }
 
     const [searchVal, setSearchVal] = useState("");
     const handleSearchClick = () => {
         console.log("search val  = " + searchVal);
         if (searchVal === "") { setFilteredData(individualBrandData); return; }
-        
+
         const filterBySearch = filteredData.filter(item => item.brand.toLowerCase().includes(searchVal.toLowerCase()))
-       // const tempFilteredData = tempFilteredData.filter(data => data.brand.toLowerCase().includes(brand.toLowerCase()));
+        // const tempFilteredData = tempFilteredData.filter(data => data.brand.toLowerCase().includes(brand.toLowerCase()));
         setFilteredData(filterBySearch);
     }
 
@@ -72,7 +66,7 @@ function IndividualCategoryDetailPageNew(props) {
         let tempFilteredData = individualBrandData;
 
         // Brand Filter
-        if (brand !== '⬇️ Select a brand ⬇️') {
+        if (brand !== '⬇️ Select a brand ⬇️' && brand != null) {
             tempFilteredData = tempFilteredData.filter(data => data.brand.toLowerCase().includes(brand.toLowerCase()));
         }
 
@@ -141,7 +135,6 @@ function IndividualCategoryDetailPageNew(props) {
                                             <option defaultValue="⬇️ Select a brand ⬇️"> -- Select a brand -- </option>
                                             {brandDistinctValues.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
                                         </select>
-
                                     </form>
                                 </div>
 
@@ -178,25 +171,6 @@ function IndividualCategoryDetailPageNew(props) {
                                     <div>
                                         <button type="button" className={activeDiscountColor === "Fifth" ? "activeButton" : ""} onClick={() => { handleDiscountFilter(25); setActiveDiscountColor("Fifth"); }}> 25%off or more</button>
                                     </div>
-
-
-
-
-                                    {/* <div>
-                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(5)}> 5%off or more </button>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(10)}> 10%off or more </button>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(15)}> 15%off or more</button>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(20)}>  20%off or more</button>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-main" onClick={() => handleDiscountFilter(25)}>  25%off or more</button>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -243,6 +217,8 @@ function IndividualCategoryDetailPageNew(props) {
                                 currentPage={currentPage}
                                 handlePagination={handlePagination}
                             />
+                            <div>
+                            </div>
                         </div>
                     </div>
                 </div>
