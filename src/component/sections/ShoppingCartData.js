@@ -1,14 +1,16 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCart } from '../sliceComponent/CartSlice';
-import { deleteFromCart, deleteAllCart } from '../sliceComponent/CartSlice';
+import { addToCart, minusFromCart, deleteFromCart } from '../sliceComponent/CartSlice';
+
 function ShoppingCartData() {
-    const cartData = useSelector((state) => state.cart.orders);
-    console.log("cart data " + JSON.stringify(cartData));
+    const cartOrdersData = useSelector((state) => state.cart.orders);
+    const cartTotalPayableAmout = useSelector((state) => state.cart.totalPayableAmount);
+    console.log("cart amount " + JSON.stringify(cartTotalPayableAmout));
+    console.log("cart orders " + JSON.stringify(cartOrdersData));
     const dispatch = useDispatch();
     return (
         <div>
-             <section class="page-title">
+            <section class="page-title">
                 {/* <!-- Container Start --> */}
                 <div class="container">
                     <div class="row">
@@ -21,27 +23,27 @@ function ShoppingCartData() {
                 {/* <!-- Container End --> */}
             </section>
             {
-                (cartData.length > 0) ?
-                    (<div class="pt-4 pb-4 container" >                      
-                    <h1 className='text-center'>Cart Items</h1>
-                        <div class="mt-5 gap-3 gap-md-0 gap-lg-0 row">                                                
-                            <div class="col-lg-8 col-md-7" >  
-                                <div class="card">                                   
+                (cartOrdersData.length > 0) ?
+                    (<div class="pt-4 pb-4 container" >
+                        <h1 className='text-center'>Cart Items</h1>
+                        <div class="mt-5 gap-3 gap-md-0 gap-lg-0 row">
+                            <div class="col-lg-8 col-md-7" >
+                                <div class="card">
                                     {
-                                        cartData.map((product) => {
+                                        cartOrdersData.map((product) => {
                                             return (
                                                 <div class="mt-2 store-item bottom-line pb-3" >
                                                     <div class="row">
                                                         <div class="col-lg-3">
-                                                            <img class="image-store" src={product.image} />
+                                                            <img class="image-store" src={product.image} alt='no data' />
                                                         </div>
                                                         <div class="col-lg-9">
                                                             <div class="mt-3 mt-lg-0 d-flex align-items-center justify-content-between">
                                                                 <h5>{product.title}</h5>
                                                                 <div>
                                                                     <div class="btn-quantity-container d-flex align-items-center justify-content-center" style={{ gap: ".5rem" }}>
-                                                                        <button class="btn-quantity btn btn-default">−</button>
-                                                                        <span class="p-quantiry">1</span>
+                                                                        <button class="btn-quantity btn btn-default" onClick={() => { dispatch(minusFromCart(product)) }}>−</button>
+                                                                        <span class="p-quantiry">{product.quantity}</span>
                                                                         <button class="btn-quantity btn btn-default" onClick={() => { dispatch(addToCart(product)) }}>+</button>
                                                                     </div>
                                                                 </div>
@@ -51,10 +53,21 @@ function ShoppingCartData() {
                                                                 <h6> Original Price : ${product.price} </h6>
                                                             </div>
                                                             <div class="list-store d-flex align-items-center justify-content-between" >
-                                                                <h6> Discount : {product.discount}% </h6>
+                                                                {
+                                                                    (product.discount) ? (
+                                                                        <h6> Discount : {product.discount}% </h6>)
+                                                                        : (
+                                                                            <h6> Discount : NIL </h6>
+                                                                        )
+                                                                }
                                                             </div>
                                                             <div class="list-store d-flex align-items-center justify-content-between mb-3" >
-                                                                <h6>Discount Price : ${Math.trunc(product.price - ((product.price * product.discount) / 100))}</h6>
+                                                                {(product.discount) ? (
+                                                                    < h6 > Total Price : ${Math.trunc(product.price - ((product.price * product.discount) / 100))}</h6>)
+                                                                    : (
+                                                                        < h6 > Total Price : ${product.price} </h6>
+                                                                    )
+                                                                }
                                                             </div>
                                                             <div class="list-store d-flex align-items-center justify-content-between">
                                                                 <div class="d-flex gap-2">
@@ -64,7 +77,12 @@ function ShoppingCartData() {
                                                                     </button>
                                                                 </div>
                                                                 <div class="d-flex">
-                                                                    <h5>${Math.trunc(product.price - ((product.price * product.discount) / 100))}</h5>
+                                                                    {(product.discount) ? (
+                                                                        <h5>${Math.trunc(product.price - ((product.price * product.discount) / 100))}</h5>)
+                                                                        : (
+                                                                            < h5 >${product.price} </h5>
+                                                                        )
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -82,17 +100,26 @@ function ShoppingCartData() {
                                             <h4>The total amount of</h4>
                                             <div class="store-item mt-2">
                                                 <div class="row">
+                                                    <div class="col-6">
+                                                        <p class="p-total-label" >No. of Items</p>
+                                                    </div>
+                                                    <div class="col-6" data-reactid=".0.1.1.0.0.0.1.1.1">
+                                                        <p class="p-total">$0.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 row">
                                                     <div>
                                                         <div class="list-store d-flex align-items-center justify-content-between">
-                                                            <p>Temporary amount</p>
-                                                            <p>$0.00</p>
+                                                            <p>Sub Total</p>
+                                                            <p>{cartTotalPayableAmout}</p>
                                                         </div>
                                                         <div class="bottom-line" ></div>
                                                     </div>
                                                 </div>
+
                                                 <div class="mt-2 row">
                                                     <div class="col-6">
-                                                        <p class="p-total-label" >The total amount of (Including VAT)</p>
+                                                        <p class="p-total-label" >total amount</p>
                                                     </div>
                                                     <div class="col-6" data-reactid=".0.1.1.0.0.0.1.1.1">
                                                         <p class="p-total">$0.00</p>
@@ -113,7 +140,7 @@ function ShoppingCartData() {
                         <h1 class="text-center mt-5" >oops!!   Your Cart is Empty</h1>
                     )
             }
-        </div>
+        </div >
     )
 }
 export default ShoppingCartData
