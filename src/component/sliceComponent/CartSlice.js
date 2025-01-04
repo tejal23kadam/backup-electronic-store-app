@@ -10,7 +10,7 @@ const CartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       let orderIndex = state.orders.findIndex((x) => x.id === action.payload.id);
-      if (orderIndex >= 0) {
+      if (orderIndex >=0 ) {
         state.orders[orderIndex].quantity = state.orders[orderIndex].quantity + 1;
       }
       else {
@@ -29,6 +29,7 @@ const CartSlice = createSlice({
       if (orderIndex >= 0) {
         if (state.orders[orderIndex].quantity > 0) {
           state.orders[orderIndex].quantity = state.orders[orderIndex].quantity - 1;
+          state.totalPayableAmount = state.orders.reduce((quantity, item) => item.quantity * Math.trunc(item.price - ((item.price * item.discount) / 100)) + quantity, 0);
         }
       }   
 

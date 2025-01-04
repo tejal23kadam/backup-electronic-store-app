@@ -6,7 +6,7 @@ function ShoppingCartData() {
     const cartOrdersData = useSelector((state) => state.cart.orders);
     const cartTotalPayableAmout = useSelector((state) => state.cart.totalPayableAmount);
     console.log("cart amount " + JSON.stringify(cartTotalPayableAmout));
-    console.log("cart orders " + JSON.stringify(cartOrdersData));
+    console.log("cart orders " + JSON.stringify(cartOrdersData));    
     const dispatch = useDispatch();
     return (
         <div>
@@ -104,7 +104,11 @@ function ShoppingCartData() {
                                                         <p class="p-total-label" >No. of Items</p>
                                                     </div>
                                                     <div class="col-6" data-reactid=".0.1.1.0.0.0.1.1.1">
-                                                        <p class="p-total">$0.00</p>
+                                                        <p class="p-total">{
+                                                            cartOrdersData.reduce((totalQty, item) => {
+                                                                return totalQty += item.quantity;
+                                                            }, 0)
+                                                        }</p>
                                                     </div>
                                                 </div>
                                                 <div class="mt-2 row">
