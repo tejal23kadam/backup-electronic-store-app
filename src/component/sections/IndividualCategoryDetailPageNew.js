@@ -24,7 +24,7 @@ function IndividualCategoryDetailPageNew(props) {
 
     let brandDistinctValues;
 
-    const postsPerPage = 8;
+    const postsPerPage = 6;
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -190,11 +190,11 @@ function IndividualCategoryDetailPageNew(props) {
                                                             (data.discount) ? (
                                                                 <div style={{ display: "flex" }}>
                                                                     <h5><s>{data.price}</s> </h5>
-                                                                    <h4><span>&#8377;</span>{Math.trunc(data.price - ((data.price * data.discount) / 100))}</h4>
-                                                                    <div style={{ display: "flex" }}>
+                                                                    <h4><span>$</span>{Math.trunc(data.price - ((data.price * data.discount) / 100))}</h4>
+                                                                    {/* <div style={{ display: "flex" }}>
                                                                         <p class="discount">{data.discount}%</p> off
 
-                                                                    </div>
+                                                                    </div> */}
                                                                 </div>
                                                             ) :
                                                                 (
@@ -203,8 +203,16 @@ function IndividualCategoryDetailPageNew(props) {
                                                         }
                                                     </div>
                                                 </div>
-                                                <i onClick={() => { dispatch(addToCart(data)) }} className="fal bi bi-cart cart" ></i>
+                                                <div class="cardbuttons">
+                                                                <button class="atc-btn" >
+                                                                <i onClick={() => { dispatch(addToCart(data)) }}  className="fal bi bi-cart "></i>
+                                                                    Add to cart
+                                                                </button>
+                                                            </div>
+                                                {/* <i onClick={() => { dispatch(addToCart(data)) }} className="fal bi bi-cart cart" ></i> */}
+                                                <span className='discountPercent'>{data.discount}%off</span>
                                             </div>
+                                            
                                         )))
                                     ) :
                                     (<h1>data is missing</h1>)

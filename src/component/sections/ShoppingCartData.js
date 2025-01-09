@@ -115,7 +115,7 @@ function ShoppingCartData() {
                                                     <div>
                                                         <div class="list-store d-flex align-items-center justify-content-between">
                                                             <p>Sub Total</p>
-                                                            <p>{cartTotalPayableAmout}</p>
+                                                            <p>${cartTotalPayableAmout}</p>
                                                         </div>
                                                         <div class="bottom-line" ></div>
                                                     </div>
@@ -126,7 +126,7 @@ function ShoppingCartData() {
                                                         <p class="p-total-label" >total amount</p>
                                                     </div>
                                                     <div class="col-6" data-reactid=".0.1.1.0.0.0.1.1.1">
-                                                        <p class="p-total">$0.00</p>
+                                                        <p class="p-total"> <p>${cartTotalPayableAmout}</p></p>
                                                     </div>
                                                 </div>
                                                 <div class="mt-1 row">
